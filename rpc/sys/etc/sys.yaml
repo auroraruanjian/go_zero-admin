@@ -1,0 +1,17 @@
+Name: sys.rpc
+ListenOn: 0.0.0.0:8080
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: sys.rpc
+
+JWT:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400
+
+Mysql:
+  IP: 192.168.1.61
+  Port: 3306
+  Username: root
+  Password: root
+  Database: go-zero

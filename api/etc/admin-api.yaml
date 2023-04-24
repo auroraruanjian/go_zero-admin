@@ -1,0 +1,13 @@
+Name: admin-api
+Host: 0.0.0.0
+Port: 8888
+#系统
+SysRpc:
+  Etcd:
+    Hosts:
+      - localhost:2379
+    Key: sys.rpc
+
+Auth:
+  AccessSecret: ad879037-c7a4-4063-9236-6bfc35d54b7d
+  AccessExpire: 86400
