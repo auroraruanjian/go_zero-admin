@@ -1,11 +1,15 @@
 ### 项目描述
-项目采用go-zero和gorm开发，集成后端RBAC访问控制,登录日志，前端用户登录API
+项目采用go-zero和gorm开发，集成后端RBAC访问控制,登录日志，前端用户登录API。项目定位于大中型管理系统
+> 待完成 数据校验，前端API流控，链路追踪，DB缓存，分布式事务，分布式定时任务
 
 ### 项目依赖
 * mysql
 * etcd
 * go-zero
 * gorm
+* kafka（待加入）
+* redis（待加入）
+* Elasticsearch（待加入）
 
 ### 安装go和goctl工具和框架
 1.
