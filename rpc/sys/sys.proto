@@ -27,6 +27,10 @@ message InfoReq {
 message InfoResp {
   string avatar = 1;
   string name = 2;
+  string nickName = 3;
+  string email = 4;
+  string mobile = 5;
+  int64 createdAt = 6;
   //repeated MenuListTree menuListTree=3;
   //repeated string BackgroundUrls =4;
 }

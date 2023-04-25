@@ -44,12 +44,14 @@ type MenuTreeMeta struct {
 }
 
 type UserInfoResp struct {
-	Code        string             `json:"code"`
-	Message     string             `json:"message"`
-	Avatar      string             `json:"avatar"`
-	Name        string             `json:"name"`
-	MenuTree    []*ListMenuTree    `json:"menuTree"`
-	MenuTreeVue []*ListMenuTreeVue `json:"menuTreeVue"`
+	Code      string `json:"code"`
+	Message   string `json:"message"`
+	Avatar    string `json:"avatar"`
+	Name      string `json:"name"`
+	NickName  string `json:"nickName"`
+	Email     string `json:"email"`
+	Mobile    string `json:"mobile"`
+	CreatedAt int64  `json:"created_at"`
 }
 
 type AddUserReq struct {
