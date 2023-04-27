@@ -12,7 +12,7 @@ import (
 
 type ServiceContext struct {
 	Config config.Config
-	Db     *gorm.DB
+	DB     *gorm.DB
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -49,6 +49,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	return &ServiceContext{
 		Config: c,
-		Db:     db,
+		DB:     db,
 	}
 }

@@ -13,10 +13,12 @@ import (
 )
 
 type (
-	InfoReq   = sysclient.InfoReq
-	InfoResp  = sysclient.InfoResp
-	LoginReq  = sysclient.LoginReq
-	LoginResp = sysclient.LoginResp
+	AdminPermission = sysclient.AdminPermission
+	AdminRole       = sysclient.AdminRole
+	InfoReq         = sysclient.InfoReq
+	InfoResp        = sysclient.InfoResp
+	LoginReq        = sysclient.LoginReq
+	LoginResp       = sysclient.LoginResp
 
 	Sys interface {
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)

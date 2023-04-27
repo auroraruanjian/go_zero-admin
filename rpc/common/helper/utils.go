@@ -1,6 +1,10 @@
 package helper
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"sort"
+
+	"golang.org/x/crypto/bcrypt"
+)
 
 // EncryptPassword 将密码加密，需要传入密码返回的是加密后的密码
 func EncryptPassword(password string) (string, error) {
@@ -21,4 +25,24 @@ func EqualsPassword(password, encryptPassword string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(encryptPassword), []byte(password))
 	// 对比密码是否正确会返回一个异常，按照官方的说法是只要异常是 nil 就证明密码正确
 	return err == nil
+}
+
+// 二分查找实现InArray函数
+func InArrayString(target string, str_array []string) bool {
+	sort.Strings(str_array)
+	index := sort.SearchStrings(str_array, target)
+	if index < len(str_array) && str_array[index] == target {
+		return true
+	}
+	return false
+}
+
+// 二分查找实现InArray函数
+func InArrayInt(target int, str_array []int) bool {
+	sort.Ints(str_array)
+	index := sort.SearchInts(str_array, target)
+	if index < len(str_array) && str_array[index] == target {
+		return true
+	}
+	return false
 }

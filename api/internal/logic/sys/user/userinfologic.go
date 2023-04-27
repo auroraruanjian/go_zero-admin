@@ -31,7 +31,7 @@ func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResp, err error) {
 	user_id, _ := l.ctx.Value("userId").(json.Number).Int64()
 
 	info_resp, info_err := l.svcCtx.Sys.UserInfo(l.ctx, &sysclient.InfoReq{
-		UserId: user_id,
+		UserId: int32(user_id),
 	})
 
 	if info_err != nil {
@@ -44,14 +44,36 @@ func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResp, err error) {
 		return nil, errorx.NewDefaultError(fromError.Message())
 	}
 
+	role := []*types.AdminRole{}
+	for _, value := range info_resp.AdminRole {
+		role = append(role, &types.AdminRole{
+			Name: value.Name,
+			Slug: value.Slug,
+		})
+	}
+
+	permission := []*types.AdminPermission{}
+	for _, value := range info_resp.AdminPermission {
+		permission = append(permission, &types.AdminPermission{
+			Id:          value.Id,
+			ParentId:    value.ParentId,    // 菜单名称
+			Name:        value.Name,        // 菜单名称
+			Icon:        value.Icon,        // 菜单图标
+			Rule:        value.Rule,        // 菜单路径
+			Description: value.Description, // 菜单描述
+		})
+	}
+
 	return &types.UserInfoResp{
-		Code:      "000000",
-		Message:   "登录成功",
-		Avatar:    info_resp.Avatar,
-		Name:      info_resp.Name,
-		NickName:  info_resp.NickName,
-		Email:     info_resp.Email,
-		Mobile:    info_resp.Mobile,
-		CreatedAt: info_resp.CreatedAt,
+		Code:            "000000",
+		Message:         "登录成功",
+		Avatar:          info_resp.Avatar,
+		Name:            info_resp.Name,
+		NickName:        info_resp.NickName,
+		Email:           info_resp.Email,
+		Mobile:          info_resp.Mobile,
+		CreatedAt:       info_resp.CreatedAt,
+		AdminRole:       role,
+		AdminPermission: permission,
 	}, nil
 }

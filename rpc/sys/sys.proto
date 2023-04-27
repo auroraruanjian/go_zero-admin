@@ -12,16 +12,15 @@ message LoginReq {
 
 message loginResp {
   string status = 1;
-  string currentAuthority = 2;
-  int64 id = 3;
-  string userName = 4;
-  string AccessToken = 5;
-  int64 AccessExpire = 6;
-  int64 RefreshAfter = 7;
+  int32 id = 2;
+  string userName = 3;
+  string AccessToken = 4;
+  int64 AccessExpire = 5;
+  int64 RefreshAfter = 6;
 }
 
 message InfoReq {
-  int64 UserId = 1;
+  int32 UserId = 1;
 }
 
 message InfoResp {
@@ -31,8 +30,22 @@ message InfoResp {
   string email = 4;
   string mobile = 5;
   int64 createdAt = 6;
-  //repeated MenuListTree menuListTree=3;
-  //repeated string BackgroundUrls =4;
+  repeated AdminRole adminRole = 7;
+  repeated AdminPermission adminPermission = 8;
+}
+
+message AdminRole {
+  string Name = 1;
+  string Slug = 2;
+}
+
+message AdminPermission {
+  int32 Id = 1;
+  int32 ParentId = 2;
+  string Name = 3;
+  string Icon = 4;
+  string Rule = 5;
+  string Description = 6;
 }
 
 service Sys{

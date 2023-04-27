@@ -27,7 +27,7 @@ func newAdminRole(db *gorm.DB, opts ...gen.DOOption) adminRole {
 
 	tableName := _adminRole.adminRoleDo.TableName()
 	_adminRole.ALL = field.NewAsterisk(tableName)
-	_adminRole.Id = field.NewInt64(tableName, "id")
+	_adminRole.Id = field.NewInt(tableName, "id")
 	_adminRole.Name = field.NewString(tableName, "name")
 	_adminRole.Slug = field.NewString(tableName, "slug")
 	_adminRole.CreatedAt = field.NewTime(tableName, "created_at")
@@ -85,7 +85,7 @@ type adminRole struct {
 	adminRoleDo
 
 	ALL       field.Asterisk
-	Id        field.Int64
+	Id        field.Int
 	Name      field.String
 	Slug      field.String
 	CreatedAt field.Time
@@ -109,7 +109,7 @@ func (a adminRole) As(alias string) *adminRole {
 
 func (a *adminRole) updateTableName(table string) *adminRole {
 	a.ALL = field.NewAsterisk(table)
-	a.Id = field.NewInt64(table, "id")
+	a.Id = field.NewInt(table, "id")
 	a.Name = field.NewString(table, "name")
 	a.Slug = field.NewString(table, "slug")
 	a.CreatedAt = field.NewTime(table, "created_at")

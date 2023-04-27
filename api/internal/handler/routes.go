@@ -20,41 +20,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/currentUser",
 					Handler: sysuser.UserInfoHandler(serverCtx),
 				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/add",
-					Handler: sysuser.UserAddHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/list",
-					Handler: sysuser.UserListHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/update",
-					Handler: sysuser.UserUpdateHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/delete",
-					Handler: sysuser.UserDeleteHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/reSetPassword",
-					Handler: sysuser.ReSetPasswordHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/UpdateUserStatus",
-					Handler: sysuser.UpdateUserStatusHandler(serverCtx),
-				},
-				{
-					Method:  http.MethodPost,
-					Path:    "/selectAllData",
-					Handler: sysuser.SelectAllDataHandler(serverCtx),
-				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

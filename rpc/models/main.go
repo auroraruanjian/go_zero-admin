@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-zero-demo/api/common/helper"
+	"go-zero-demo/rpc/common/helper"
 	"go-zero-demo/rpc/models/adminmodel"
 
 	"gorm.io/driver/mysql"
@@ -14,6 +14,13 @@ import (
 type UserQuerier interface {
 	// SELECT * FROM @@table WHERE name = @name
 	FindUserByName(name string) (*gen.T, error)
+}
+
+type PermissionQuerier interface {
+	//SELECT distinct * FROM @@table WHERE id IN(
+	//	SELECT id FROM admin_role_permission WHERE admin_role_permission.admin_role_id IN(@role)
+	//)
+	FindByRoleId(role string) ([]*gen.T, error)
 }
 
 func main() {
@@ -35,12 +42,20 @@ func main() {
 
 	g.ApplyInterface(func() {},
 		adminmodel.AdminRole{},
+	)
+
+	g.ApplyInterface(func(PermissionQuerier) {},
 		adminmodel.AdminPermission{},
 	)
 
 	// Generate the code
 	g.Execute()
 
+	gormdb.Migrator().DropTable(
+		adminmodel.AdminUser{},
+		adminmodel.AdminRole{},
+		adminmodel.AdminPermission{},
+	)
 	gormdb.AutoMigrate(
 		adminmodel.AdminUser{},
 		adminmodel.AdminRole{},
@@ -51,13 +66,20 @@ func main() {
 	password, _ := helper.EncryptPassword("123456")
 	user := &adminmodel.AdminUser{
 		Name:     "admin",
-		NickName: "administor",
+		NickName: "administrator",
 		Password: password,
 		Status:   1,
 		CreateBy: "system",
+		AdminRole: []*adminmodel.AdminRole{
+			{
+				Name: "admin",
+				Slug: "administrator",
+			},
+		},
 	}
 	gormdb.Clauses(clause.OnConflict{
-		Columns:   []clause.Column{{Name: "id"}},
-		DoUpdates: clause.AssignmentColumns([]string{"name", "nick_name", "password"}),
+		//Columns:   []clause.Column{{Name: "id"}},
+		//DoUpdates: clause.AssignmentColumns([]string{"name", "nick_name", "password"}),
+		UpdateAll: true,
 	}).Create(user)
 }

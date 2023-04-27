@@ -28,14 +28,14 @@ func newAdminUser(db *gorm.DB, opts ...gen.DOOption) adminUser {
 
 	tableName := _adminUser.adminUserDo.TableName()
 	_adminUser.ALL = field.NewAsterisk(tableName)
-	_adminUser.Id = field.NewInt64(tableName, "id")
+	_adminUser.Id = field.NewInt(tableName, "id")
 	_adminUser.Name = field.NewString(tableName, "name")
 	_adminUser.NickName = field.NewString(tableName, "nick_name")
 	_adminUser.Avatar = field.NewString(tableName, "avatar")
 	_adminUser.Password = field.NewString(tableName, "password")
 	_adminUser.Email = field.NewString(tableName, "email")
 	_adminUser.Mobile = field.NewString(tableName, "mobile")
-	_adminUser.Status = field.NewInt64(tableName, "status")
+	_adminUser.Status = field.NewInt(tableName, "status")
 	_adminUser.CreateBy = field.NewString(tableName, "create_by")
 	_adminUser.CreatedAt = field.NewTime(tableName, "created_at")
 	_adminUser.UpdatedAt = field.NewTime(tableName, "updated_at")
@@ -80,14 +80,14 @@ type adminUser struct {
 	adminUserDo
 
 	ALL       field.Asterisk
-	Id        field.Int64
+	Id        field.Int
 	Name      field.String
 	NickName  field.String
 	Avatar    field.String
 	Password  field.String
 	Email     field.String
 	Mobile    field.String
-	Status    field.Int64
+	Status    field.Int
 	CreateBy  field.String
 	CreatedAt field.Time
 	UpdatedAt field.Time
@@ -108,14 +108,14 @@ func (a adminUser) As(alias string) *adminUser {
 
 func (a *adminUser) updateTableName(table string) *adminUser {
 	a.ALL = field.NewAsterisk(table)
-	a.Id = field.NewInt64(table, "id")
+	a.Id = field.NewInt(table, "id")
 	a.Name = field.NewString(table, "name")
 	a.NickName = field.NewString(table, "nick_name")
 	a.Avatar = field.NewString(table, "avatar")
 	a.Password = field.NewString(table, "password")
 	a.Email = field.NewString(table, "email")
 	a.Mobile = field.NewString(table, "mobile")
-	a.Status = field.NewInt64(table, "status")
+	a.Status = field.NewInt(table, "status")
 	a.CreateBy = field.NewString(table, "create_by")
 	a.CreatedAt = field.NewTime(table, "created_at")
 	a.UpdatedAt = field.NewTime(table, "updated_at")

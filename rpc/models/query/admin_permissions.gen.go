@@ -6,6 +6,7 @@ package query
 
 import (
 	"context"
+	"strings"
 
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -27,8 +28,8 @@ func newAdminPermission(db *gorm.DB, opts ...gen.DOOption) adminPermission {
 
 	tableName := _adminPermission.adminPermissionDo.TableName()
 	_adminPermission.ALL = field.NewAsterisk(tableName)
-	_adminPermission.Id = field.NewInt64(tableName, "id")
-	_adminPermission.ParentId = field.NewInt64(tableName, "parent_id")
+	_adminPermission.Id = field.NewInt(tableName, "id")
+	_adminPermission.ParentId = field.NewInt(tableName, "parent_id")
 	_adminPermission.Name = field.NewString(tableName, "name")
 	_adminPermission.Icon = field.NewString(tableName, "icon")
 	_adminPermission.Rule = field.NewString(tableName, "icon")
@@ -76,8 +77,8 @@ type adminPermission struct {
 	adminPermissionDo
 
 	ALL         field.Asterisk
-	Id          field.Int64
-	ParentId    field.Int64
+	Id          field.Int
+	ParentId    field.Int
 	Name        field.String
 	Icon        field.String
 	Rule        field.String
@@ -101,8 +102,8 @@ func (a adminPermission) As(alias string) *adminPermission {
 
 func (a *adminPermission) updateTableName(table string) *adminPermission {
 	a.ALL = field.NewAsterisk(table)
-	a.Id = field.NewInt64(table, "id")
-	a.ParentId = field.NewInt64(table, "parent_id")
+	a.Id = field.NewInt(table, "id")
+	a.ParentId = field.NewInt(table, "parent_id")
 	a.Name = field.NewString(table, "name")
 	a.Icon = field.NewString(table, "icon")
 	a.Rule = field.NewString(table, "icon")
@@ -292,6 +293,27 @@ type IAdminPermissionDo interface {
 	Returning(value interface{}, columns ...string) IAdminPermissionDo
 	UnderlyingDB() *gorm.DB
 	schema.Tabler
+
+	FindByRoleId(role string) (result []*adminmodel.AdminPermission, err error)
+}
+
+// SELECT distinct * FROM @@table WHERE id IN(
+//
+//	SELECT id FROM admin_role_permission WHERE admin_role_permission.admin_role_id IN(@role)
+//
+// )
+func (a adminPermissionDo) FindByRoleId(role string) (result []*adminmodel.AdminPermission, err error) {
+	var params []interface{}
+
+	var generateSQL strings.Builder
+	params = append(params, role)
+	generateSQL.WriteString("SELECT distinct * FROM admin_permissions WHERE id IN( SELECT id FROM admin_role_permission WHERE admin_role_permission.admin_role_id IN(?) ) ")
+
+	var executeSQL *gorm.DB
+	executeSQL = a.UnderlyingDB().Raw(generateSQL.String(), params...).Find(&result) // ignore_security_alert
+	err = executeSQL.Error
+
+	return
 }
 
 func (a adminPermissionDo) Debug() IAdminPermissionDo {

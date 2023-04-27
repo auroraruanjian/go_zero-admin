@@ -37,6 +37,7 @@ goctl api go -api admin.api -dir ../
 goctl rpc template -o sys.proto
 goctl rpc protoc sys.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
 ```
+
 ### 4.运行测试
 > 进到`api/`目录操作
 ```

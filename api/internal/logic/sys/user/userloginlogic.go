@@ -56,14 +56,12 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq) (resp *types.LoginResp, 
 	}
 
 	return &types.LoginResp{
-		Code:             "000000",
-		Message:          "登录成功",
-		Status:           login_resp.Status,
-		CurrentAuthority: login_resp.CurrentAuthority,
-		Id:               login_resp.Id,
-		UserName:         login_resp.UserName,
-		AccessToken:      login_resp.AccessToken,
-		AccessExpire:     login_resp.AccessExpire,
-		RefreshAfter:     login_resp.RefreshAfter,
+		Code:         "000000",
+		Message:      "登录成功",
+		Status:       login_resp.Status,
+		UserName:     login_resp.UserName,
+		AccessToken:  login_resp.AccessToken,
+		AccessExpire: login_resp.AccessExpire,
+		RefreshAfter: login_resp.RefreshAfter,
 	}, nil
 }

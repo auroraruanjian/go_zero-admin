@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"go-zero-demo/api/common/helper"
+	"go-zero-demo/rpc/common/helper"
 	"go-zero-demo/rpc/models/query"
 	"go-zero-demo/rpc/sys/internal/svc"
 	"go-zero-demo/rpc/sys/sysclient"
@@ -51,13 +51,12 @@ func (l *LoginLogic) Login(in *sysclient.LoginReq) (*sysclient.LoginResp, error)
 	}
 
 	return &sysclient.LoginResp{
-		Id:               1,
-		UserName:         "nick",
-		CurrentAuthority: "admin",
-		Status:           "ok",
-		AccessToken:      jwtToken,
-		AccessExpire:     now + accessExpire,
-		RefreshAfter:     now + accessExpire/2,
+		Id:           1,
+		UserName:     user_row.Name,
+		Status:       "ok",
+		AccessToken:  jwtToken,
+		AccessExpire: now + accessExpire,
+		RefreshAfter: now + accessExpire/2,
 	}, nil
 }
 
