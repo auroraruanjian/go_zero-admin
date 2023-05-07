@@ -1,6 +1,6 @@
 ### 项目描述
 项目采用go-zero和gorm开发，集成后端RBAC访问控制,登录日志，前端用户登录API。项目定位于大中型管理系统
-> 待完成 数据校验，前端API流控，链路追踪，DB缓存，分布式事务，分布式定时任务
+> 待完成 数据校验，前端API流控，链路追踪，DB缓存，DTM分布式事务，分布式定时任务
 
 ### 项目依赖
 * mysql
@@ -39,6 +39,11 @@ goctl rpc protoc sys.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. ../ --home 
 ```
 
 ### 4.运行测试
+> 进到`rpc/models`目录导入数据库
+```
+go run main.go
+```
+
 > 进到`api/`目录操作
 ```
 go run admin.go -f etc/admin-api.yaml

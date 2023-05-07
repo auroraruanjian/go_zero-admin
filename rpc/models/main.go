@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"go-zero-demo/rpc/common/helper"
 	"go-zero-demo/rpc/models/adminmodel"
+	"io/ioutil"
 
+	"gopkg.in/yaml.v2"
 	"gorm.io/driver/mysql"
 	"gorm.io/gen"
 	"gorm.io/gorm"
@@ -23,13 +26,28 @@ type PermissionQuerier interface {
 	FindByRoleId(role string) ([]*gen.T, error)
 }
 
+type Conf struct {
+	Mysql Mysql `yaml:"Mysql"`
+}
+
+type Mysql struct {
+	IP       string `yaml:"IP"`
+	Port     string `yaml:"Port"`
+	Username string `yaml:"Username"`
+	Password string `yaml:"Password"`
+	Database string `yaml:"Database"`
+}
+
 func main() {
+	config := getConf()
+	dsn := getDsn(config.Mysql)
+
 	g := gen.NewGenerator(gen.Config{
 		OutPath: "./query",
 		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
 
-	gormdb, _ := gorm.Open(mysql.Open("root:root@(192.168.1.61:3306)/go-zero?charset=utf8mb4&parseTime=True&loc=Local"))
+	gormdb, _ := gorm.Open(mysql.Open(dsn))
 	g.UseDB(gormdb) // reuse your gorm db
 
 	// Generate basic type-safe DAO API for struct `model.User` following conventions
@@ -82,4 +100,21 @@ func main() {
 		//DoUpdates: clause.AssignmentColumns([]string{"name", "nick_name", "password"}),
 		UpdateAll: true,
 	}).Create(user)
+}
+
+func getDsn(mysqlConfig Mysql) string {
+	return mysqlConfig.Username + ":" + mysqlConfig.Password + "@(" + mysqlConfig.IP + ":" + mysqlConfig.Port + ")/" + mysqlConfig.Database + "?charset=utf8mb4&parseTime=True&loc=Local"
+}
+
+func getConf() Conf {
+	var conf Conf // 加载文件
+	yamlFile, err := ioutil.ReadFile("./config.yaml")
+	if err != nil {
+		fmt.Println(err.Error())
+	} // 将读取的yaml文件解析为响应的 struct
+	err = yaml.Unmarshal(yamlFile, &conf)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return conf
 }
