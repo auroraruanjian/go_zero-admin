@@ -7,8 +7,6 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	Code             string `json:"code"`
-	Message          string `json:"message"`
 	Status           string `json:"status"`
 	CurrentAuthority string `json:"currentAuthority"`
 	UserName         string `json:"userName"`
@@ -32,8 +30,6 @@ type AdminPermission struct {
 }
 
 type UserInfoResp struct {
-	Code            string             `json:"code"`
-	Message         string             `json:"message"`
 	Avatar          string             `json:"avatar"`
 	Name            string             `json:"name"`
 	NickName        string             `json:"nickName"`

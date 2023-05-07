@@ -65,8 +65,6 @@ func (l *UserInfoLogic) UserInfo() (resp *types.UserInfoResp, err error) {
 	}
 
 	return &types.UserInfoResp{
-		Code:            "000000",
-		Message:         "登录成功",
 		Avatar:          info_resp.Avatar,
 		Name:            info_resp.Name,
 		NickName:        info_resp.NickName,

@@ -3,10 +3,12 @@ package user
 import (
 	"net/http"
 
-	"github.com/zeromicro/go-zero/rest/httpx"
+	"go-zero-demo/api/common/response"
 	"go-zero-demo/api/internal/logic/sys/user"
 	"go-zero-demo/api/internal/svc"
 	"go-zero-demo/api/internal/types"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func UserLoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
@@ -19,10 +21,6 @@ func UserLoginHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		l := user.NewUserLoginLogic(r.Context(), svcCtx)
 		resp, err := l.UserLogin(&req)
-		if err != nil {
-			httpx.ErrorCtx(r.Context(), w, err)
-		} else {
-			httpx.OkJsonCtx(r.Context(), w, resp)
-		}
+		response.Response(w, resp, err)
 	}
 }

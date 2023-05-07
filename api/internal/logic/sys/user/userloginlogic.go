@@ -56,8 +56,6 @@ func (l *UserLoginLogic) UserLogin(req *types.LoginReq) (resp *types.LoginResp, 
 	}
 
 	return &types.LoginResp{
-		Code:         "000000",
-		Message:      "登录成功",
 		Status:       login_resp.Status,
 		UserName:     login_resp.UserName,
 		AccessToken:  login_resp.AccessToken,

@@ -28,14 +28,14 @@ go run main.go
 > 进到`api/doc/`目录执行
 ```
 goctl api -o admin.api
-goctl api go -api admin.api -dir ../
+goctl api go -api admin.api -dir ../ --home ../../.template
 ```
 
 ### 3.创建rpc
 > 进到`rpc/sys/`目录操作
 ```
 goctl rpc template -o sys.proto
-goctl rpc protoc sys.proto --go_out=./ --go-grpc_out=./ --zrpc_out=.
+goctl rpc protoc sys.proto --go_out=./ --go-grpc_out=./ --zrpc_out=. ../ --home ../../.template
 ```
 
 ### 4.运行测试

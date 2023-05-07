@@ -1,17 +1,17 @@
 package user
 
 import (
+	"go-zero-demo/api/common/response"
 	"net/http"
 
-	"go-zero-demo/api/common/response"
 	"go-zero-demo/api/internal/logic/sys/user"
 	"go-zero-demo/api/internal/svc"
 )
 
-func UserInfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func AddHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := user.NewUserInfoLogic(r.Context(), svcCtx)
-		resp, err := l.UserInfo()
+		l := user.NewAddLogic(r.Context(), svcCtx)
+		resp, err := l.Add()
 		response.Response(w, resp, err)
 	}
 }

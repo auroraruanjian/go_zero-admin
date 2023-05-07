@@ -20,6 +20,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/currentUser",
 					Handler: sysuser.UserInfoHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/addUser",
+					Handler: sysuser.AddHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

@@ -2,8 +2,8 @@ syntax = "v1"
 
 info(
 	desc: "用户相关"
-	author: "koobe"
-	email: "1002219331@qq.com"
+	author: "nick"
+	email: ""
 )
 
 type (
@@ -12,8 +12,6 @@ type (
 		Password string `json:"password"`
 	}
 	loginResp {
-		Code             string `json:"code"`
-		Message          string `json:"message"`
 		Status           string `json:"status"`
 		CurrentAuthority string `json:"currentAuthority"`
 		UserName         string `json:"userName"`
@@ -36,8 +34,6 @@ type (
 	}
 
 	userInfoResp {
-		Code            string             `json:"code"`
-		Message         string             `json:"message"`
 		Avatar          string             `json:"avatar"`
 		Name            string             `json:"name"`
 		NickName        string             `json:"nickName"`
@@ -58,6 +54,9 @@ type (
 service admin-api {
 	@handler UserInfo
 	get /currentUser returns (userInfoResp)
+	
+	@handler Add
+	get /addUser returns (userInfoResp)
 }
 
 @server(
