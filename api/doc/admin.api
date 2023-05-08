@@ -43,6 +43,17 @@ type (
 		AdminRole       []*AdminRole       `json:"admin_role"`
 		AdminPermission []*AdminPermission `json:"admin_permission"`
 	}
+
+	addUserReq {
+		Name     string `json:"name"`
+		NickName string `json:"nickName"`
+		Avatar   string `json:"avatar"`
+		Password string `json:"password"`
+		Email    string `json:"email,optional"`
+		Mobile   string `json:"mobile,optional"`
+		Status   int32  `json:"status,optional,default=1,range=[0:1]"`
+	}
+	addUserResp struct{}
 )
 
 @server(
@@ -56,7 +67,7 @@ service admin-api {
 	get /currentUser returns (userInfoResp)
 	
 	@handler Add
-	get /addUser returns (userInfoResp)
+	get /addUser (addUserReq) returns (addUserResp)
 }
 
 @server(

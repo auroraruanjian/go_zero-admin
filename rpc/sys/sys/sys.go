@@ -19,10 +19,13 @@ type (
 	InfoResp        = sysclient.InfoResp
 	LoginReq        = sysclient.LoginReq
 	LoginResp       = sysclient.LoginResp
+	UserAddReq      = sysclient.UserAddReq
+	UserAddResp     = sysclient.UserAddResp
 
 	Sys interface {
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 		UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
+		AddUser(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
 	}
 
 	defaultSys struct {
@@ -44,4 +47,9 @@ func (m *defaultSys) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallO
 func (m *defaultSys) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
 	client := sysclient.NewSysClient(m.cli.Conn())
 	return client.UserInfo(ctx, in, opts...)
+}
+
+func (m *defaultSys) AddUser(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
+	client := sysclient.NewSysClient(m.cli.Conn())
+	return client.AddUser(ctx, in, opts...)
 }

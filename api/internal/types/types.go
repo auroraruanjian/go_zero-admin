@@ -39,3 +39,16 @@ type UserInfoResp struct {
 	AdminRole       []*AdminRole       `json:"admin_role"`
 	AdminPermission []*AdminPermission `json:"admin_permission"`
 }
+
+type AddUserReq struct {
+	Name     string `json:"name"`
+	NickName string `json:"nickName"`
+	Avatar   string `json:"avatar"`
+	Password string `json:"password"`
+	Email    string `json:"email,optional"`
+	Mobile   string `json:"mobile,optional"`
+	Status   int32  `json:"status,optional,default=1,range=[0:1]"`
+}
+
+type AddUserResp struct {
+}

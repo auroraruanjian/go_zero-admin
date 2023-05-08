@@ -48,7 +48,21 @@ message AdminPermission {
   string Description = 6;
 }
 
+message UserAddReq {
+  string name = 1;
+  string nickName = 2;
+  string avatar = 3;
+  string password = 4;
+  string email = 5;
+  string mobile = 6;
+  int32  status = 7;
+}
+message UserAddResp {
+  string pong = 1;
+}
+
 service Sys{
-    rpc Login(LoginReq) returns(loginResp);
-    rpc UserInfo(InfoReq) returns(InfoResp);
+  rpc Login(LoginReq) returns(loginResp);
+  rpc UserInfo(InfoReq) returns(InfoResp);
+  rpc AddUser(UserAddReq) returns(UserAddResp);
 }

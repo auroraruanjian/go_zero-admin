@@ -17,20 +17,14 @@ type Body struct {
 	Data interface{} `json:"data,omitempty"`
 }
 
-//统一封装成功响应值
-
+// 统一封装成功响应值
 func Response(w http.ResponseWriter, resp interface{}, err error) {
 	var body Body
 	if err != nil {
 		switch e := err.(type) {
 		case *errorx.CodeError: //业务输出错误
-
 			body.Code = e.Code
-
 			body.Message = e.Message
-
-			body.Data = e.Data
-		//body.Data = e.Data()
 		default: //系统未知错误
 			body.Code = 1
 			body.Message = err.Error()

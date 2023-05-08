@@ -74,7 +74,7 @@ func main() {
 		adminmodel.AdminRole{},
 		adminmodel.AdminPermission{},
 	)
-	gormdb.AutoMigrate(
+	gormdb.Set("gorm:table_options", "ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;").AutoMigrate(
 		adminmodel.AdminUser{},
 		adminmodel.AdminRole{},
 		adminmodel.AdminPermission{},
@@ -87,7 +87,7 @@ func main() {
 		NickName: "administrator",
 		Password: password,
 		Status:   1,
-		CreateBy: "system",
+		CreateBy: 0,
 		AdminRole: []*adminmodel.AdminRole{
 			{
 				Name: "admin",

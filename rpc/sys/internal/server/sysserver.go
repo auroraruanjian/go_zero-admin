@@ -31,3 +31,8 @@ func (s *SysServer) UserInfo(ctx context.Context, in *sysclient.InfoReq) (*syscl
 	l := logic.NewUserInfoLogic(ctx, s.svcCtx)
 	return l.UserInfo(in)
 }
+
+func (s *SysServer) AddUser(ctx context.Context, in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
+	l := logic.NewAddUserLogic(ctx, s.svcCtx)
+	return l.AddUser(in)
+}

@@ -36,7 +36,7 @@ func newAdminUser(db *gorm.DB, opts ...gen.DOOption) adminUser {
 	_adminUser.Email = field.NewString(tableName, "email")
 	_adminUser.Mobile = field.NewString(tableName, "mobile")
 	_adminUser.Status = field.NewInt(tableName, "status")
-	_adminUser.CreateBy = field.NewString(tableName, "create_by")
+	_adminUser.CreateBy = field.NewInt(tableName, "create_by")
 	_adminUser.CreatedAt = field.NewTime(tableName, "created_at")
 	_adminUser.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_adminUser.AdminRole = adminUserManyToManyAdminRole{
@@ -88,7 +88,7 @@ type adminUser struct {
 	Email     field.String
 	Mobile    field.String
 	Status    field.Int
-	CreateBy  field.String
+	CreateBy  field.Int
 	CreatedAt field.Time
 	UpdatedAt field.Time
 	AdminRole adminUserManyToManyAdminRole
@@ -116,7 +116,7 @@ func (a *adminUser) updateTableName(table string) *adminUser {
 	a.Email = field.NewString(table, "email")
 	a.Mobile = field.NewString(table, "mobile")
 	a.Status = field.NewInt(table, "status")
-	a.CreateBy = field.NewString(table, "create_by")
+	a.CreateBy = field.NewInt(table, "create_by")
 	a.CreatedAt = field.NewTime(table, "created_at")
 	a.UpdatedAt = field.NewTime(table, "updated_at")
 
