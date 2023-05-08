@@ -7,3 +7,4 @@
 *.sql linguist-language=Go
 *.uml linguist-language=Go 
 *.cmd linguist-language=Go 
+*.tpl linguist-language=Go 
