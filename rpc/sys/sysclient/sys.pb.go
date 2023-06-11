@@ -455,6 +455,7 @@ func (x *AdminPermission) GetDescription() string {
 	return ""
 }
 
+// 添加用户
 type UserAddReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -597,6 +598,204 @@ func (x *UserAddResp) GetPong() string {
 	return ""
 }
 
+// 删除用户
+type UserDelReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *UserDelReq) Reset() {
+	*x = UserDelReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserDelReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserDelReq) ProtoMessage() {}
+
+func (x *UserDelReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserDelReq.ProtoReflect.Descriptor instead.
+func (*UserDelReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *UserDelReq) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type UserDelResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+}
+
+func (x *UserDelResp) Reset() {
+	*x = UserDelResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserDelResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserDelResp) ProtoMessage() {}
+
+func (x *UserDelResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserDelResp.ProtoReflect.Descriptor instead.
+func (*UserDelResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *UserDelResp) GetPong() string {
+	if x != nil {
+		return x.Pong
+	}
+	return ""
+}
+
+// 检查菜单权限
+type CheckPermissionReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId int32  `protobuf:"varint,1,opt,name=UserId,proto3" json:"UserId,omitempty"`
+	Rule   string `protobuf:"bytes,2,opt,name=Rule,proto3" json:"Rule,omitempty"`
+}
+
+func (x *CheckPermissionReq) Reset() {
+	*x = CheckPermissionReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CheckPermissionReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckPermissionReq) ProtoMessage() {}
+
+func (x *CheckPermissionReq) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckPermissionReq.ProtoReflect.Descriptor instead.
+func (*CheckPermissionReq) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CheckPermissionReq) GetUserId() int32 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *CheckPermissionReq) GetRule() string {
+	if x != nil {
+		return x.Rule
+	}
+	return ""
+}
+
+type CheckPermissionResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pong string `protobuf:"bytes,1,opt,name=pong,proto3" json:"pong,omitempty"`
+}
+
+func (x *CheckPermissionResp) Reset() {
+	*x = CheckPermissionResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sys_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CheckPermissionResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckPermissionResp) ProtoMessage() {}
+
+func (x *CheckPermissionResp) ProtoReflect() protoreflect.Message {
+	mi := &file_sys_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckPermissionResp.ProtoReflect.Descriptor instead.
+func (*CheckPermissionResp) Descriptor() ([]byte, []int) {
+	return file_sys_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CheckPermissionResp) GetPong() string {
+	if x != nil {
+		return x.Pong
+	}
+	return ""
+}
+
 var File_sys_proto protoreflect.FileDescriptor
 
 var file_sys_proto_rawDesc = []byte{
@@ -664,7 +863,23 @@ var file_sys_proto_rawDesc = []byte{
 	0x74, 0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75,
 	0x73, 0x22, 0x21, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70,
 	0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x70, 0x6f, 0x6e, 0x67, 0x32, 0xa8, 0x01, 0x0a, 0x03, 0x53, 0x79, 0x73, 0x12, 0x32, 0x0a, 0x05,
+	0x70, 0x6f, 0x6e, 0x67, 0x22, 0x1c, 0x0a, 0x0a, 0x55, 0x73, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x52,
+	0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x21, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x73,
+	0x70, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x04, 0x70, 0x6f, 0x6e, 0x67, 0x22, 0x40, 0x0a, 0x12, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x65,
+	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x55,
+	0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x52, 0x75, 0x6c, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x04, 0x52, 0x75, 0x6c, 0x65, 0x22, 0x29, 0x0a, 0x13, 0x43, 0x68, 0x65, 0x63, 0x6b,
+	0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12,
+	0x0a, 0x04, 0x70, 0x6f, 0x6e, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x6f,
+	0x6e, 0x67, 0x32, 0xb4, 0x02, 0x0a, 0x03, 0x53, 0x79, 0x73, 0x12, 0x50, 0x0a, 0x0f, 0x43, 0x68,
+	0x65, 0x63, 0x6b, 0x50, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x1d, 0x2e,
+	0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50,
+	0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x1e, 0x2e, 0x73,
+	0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x50, 0x65,
+	0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x12, 0x32, 0x0a, 0x05,
 	0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x13, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e,
 	0x74, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x14, 0x2e, 0x73, 0x79, 0x73,
 	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x6c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70,
@@ -674,9 +889,12 @@ var file_sys_proto_rawDesc = []byte{
 	0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x38, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x55, 0x73, 0x65, 0x72,
 	0x12, 0x15, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x73, 0x65,
 	0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x42,
-	0x0d, 0x5a, 0x0b, 0x2e, 0x2f, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x6e, 0x74, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x41, 0x64, 0x64, 0x52, 0x65, 0x73, 0x70, 0x12,
+	0x38, 0x0a, 0x07, 0x44, 0x65, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x12, 0x15, 0x2e, 0x73, 0x79, 0x73,
+	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x44, 0x65, 0x6c, 0x52, 0x65,
+	0x71, 0x1a, 0x16, 0x2e, 0x73, 0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x73,
+	0x65, 0x72, 0x44, 0x65, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x42, 0x0d, 0x5a, 0x0b, 0x2e, 0x2f, 0x73,
+	0x79, 0x73, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -691,31 +909,39 @@ func file_sys_proto_rawDescGZIP() []byte {
 	return file_sys_proto_rawDescData
 }
 
-var file_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_sys_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_sys_proto_goTypes = []interface{}{
-	(*LoginReq)(nil),        // 0: sysclient.LoginReq
-	(*LoginResp)(nil),       // 1: sysclient.loginResp
-	(*InfoReq)(nil),         // 2: sysclient.InfoReq
-	(*InfoResp)(nil),        // 3: sysclient.InfoResp
-	(*AdminRole)(nil),       // 4: sysclient.AdminRole
-	(*AdminPermission)(nil), // 5: sysclient.AdminPermission
-	(*UserAddReq)(nil),      // 6: sysclient.UserAddReq
-	(*UserAddResp)(nil),     // 7: sysclient.UserAddResp
+	(*LoginReq)(nil),            // 0: sysclient.LoginReq
+	(*LoginResp)(nil),           // 1: sysclient.loginResp
+	(*InfoReq)(nil),             // 2: sysclient.InfoReq
+	(*InfoResp)(nil),            // 3: sysclient.InfoResp
+	(*AdminRole)(nil),           // 4: sysclient.AdminRole
+	(*AdminPermission)(nil),     // 5: sysclient.AdminPermission
+	(*UserAddReq)(nil),          // 6: sysclient.UserAddReq
+	(*UserAddResp)(nil),         // 7: sysclient.UserAddResp
+	(*UserDelReq)(nil),          // 8: sysclient.UserDelReq
+	(*UserDelResp)(nil),         // 9: sysclient.UserDelResp
+	(*CheckPermissionReq)(nil),  // 10: sysclient.CheckPermissionReq
+	(*CheckPermissionResp)(nil), // 11: sysclient.CheckPermissionResp
 }
 var file_sys_proto_depIdxs = []int32{
-	4, // 0: sysclient.InfoResp.adminRole:type_name -> sysclient.AdminRole
-	5, // 1: sysclient.InfoResp.adminPermission:type_name -> sysclient.AdminPermission
-	0, // 2: sysclient.Sys.Login:input_type -> sysclient.LoginReq
-	2, // 3: sysclient.Sys.UserInfo:input_type -> sysclient.InfoReq
-	6, // 4: sysclient.Sys.AddUser:input_type -> sysclient.UserAddReq
-	1, // 5: sysclient.Sys.Login:output_type -> sysclient.loginResp
-	3, // 6: sysclient.Sys.UserInfo:output_type -> sysclient.InfoResp
-	7, // 7: sysclient.Sys.AddUser:output_type -> sysclient.UserAddResp
-	5, // [5:8] is the sub-list for method output_type
-	2, // [2:5] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4,  // 0: sysclient.InfoResp.adminRole:type_name -> sysclient.AdminRole
+	5,  // 1: sysclient.InfoResp.adminPermission:type_name -> sysclient.AdminPermission
+	10, // 2: sysclient.Sys.CheckPermission:input_type -> sysclient.CheckPermissionReq
+	0,  // 3: sysclient.Sys.Login:input_type -> sysclient.LoginReq
+	2,  // 4: sysclient.Sys.UserInfo:input_type -> sysclient.InfoReq
+	6,  // 5: sysclient.Sys.AddUser:input_type -> sysclient.UserAddReq
+	8,  // 6: sysclient.Sys.DelUser:input_type -> sysclient.UserDelReq
+	11, // 7: sysclient.Sys.CheckPermission:output_type -> sysclient.CheckPermissionResp
+	1,  // 8: sysclient.Sys.Login:output_type -> sysclient.loginResp
+	3,  // 9: sysclient.Sys.UserInfo:output_type -> sysclient.InfoResp
+	7,  // 10: sysclient.Sys.AddUser:output_type -> sysclient.UserAddResp
+	9,  // 11: sysclient.Sys.DelUser:output_type -> sysclient.UserDelResp
+	7,  // [7:12] is the sub-list for method output_type
+	2,  // [2:7] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_sys_proto_init() }
@@ -820,6 +1046,54 @@ func file_sys_proto_init() {
 				return nil
 			}
 		}
+		file_sys_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserDelReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sys_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserDelResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sys_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CheckPermissionReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sys_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CheckPermissionResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -827,7 +1101,7 @@ func file_sys_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_sys_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

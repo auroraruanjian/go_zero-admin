@@ -32,7 +32,7 @@ func newAdminPermission(db *gorm.DB, opts ...gen.DOOption) adminPermission {
 	_adminPermission.ParentId = field.NewInt(tableName, "parent_id")
 	_adminPermission.Name = field.NewString(tableName, "name")
 	_adminPermission.Icon = field.NewString(tableName, "icon")
-	_adminPermission.Rule = field.NewString(tableName, "icon")
+	_adminPermission.Rule = field.NewString(tableName, "rule")
 	_adminPermission.Description = field.NewString(tableName, "description")
 	_adminPermission.CreatedAt = field.NewTime(tableName, "created_at")
 	_adminPermission.UpdatedAt = field.NewTime(tableName, "updated_at")
@@ -106,7 +106,7 @@ func (a *adminPermission) updateTableName(table string) *adminPermission {
 	a.ParentId = field.NewInt(table, "parent_id")
 	a.Name = field.NewString(table, "name")
 	a.Icon = field.NewString(table, "icon")
-	a.Rule = field.NewString(table, "icon")
+	a.Rule = field.NewString(table, "rule")
 	a.Description = field.NewString(table, "description")
 	a.CreatedAt = field.NewTime(table, "created_at")
 	a.UpdatedAt = field.NewTime(table, "updated_at")
@@ -131,7 +131,7 @@ func (a *adminPermission) fillFieldMap() {
 	a.fieldMap["parent_id"] = a.ParentId
 	a.fieldMap["name"] = a.Name
 	a.fieldMap["icon"] = a.Icon
-	a.fieldMap["icon"] = a.Rule
+	a.fieldMap["rule"] = a.Rule
 	a.fieldMap["description"] = a.Description
 	a.fieldMap["created_at"] = a.CreatedAt
 	a.fieldMap["updated_at"] = a.UpdatedAt

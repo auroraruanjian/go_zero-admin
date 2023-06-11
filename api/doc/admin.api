@@ -54,6 +54,11 @@ type (
 		Status   int32  `json:"status,optional,default=1,range=[0:1]"`
 	}
 	addUserResp struct{}
+
+	delUserReq {
+		Id int32 `json:"id"`
+	}
+	delUserResp struct{}
 )
 
 @server(
@@ -68,6 +73,9 @@ service admin-api {
 	
 	@handler Add
 	get /addUser (addUserReq) returns (addUserResp)
+	
+	@handler Del
+	get /delUser (delUserReq) returns (delUserResp)
 }
 
 @server(

@@ -19,18 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Sys_Login_FullMethodName    = "/sysclient.Sys/Login"
-	Sys_UserInfo_FullMethodName = "/sysclient.Sys/UserInfo"
-	Sys_AddUser_FullMethodName  = "/sysclient.Sys/AddUser"
+	Sys_CheckPermission_FullMethodName = "/sysclient.Sys/CheckPermission"
+	Sys_Login_FullMethodName           = "/sysclient.Sys/Login"
+	Sys_UserInfo_FullMethodName        = "/sysclient.Sys/UserInfo"
+	Sys_AddUser_FullMethodName         = "/sysclient.Sys/AddUser"
+	Sys_DelUser_FullMethodName         = "/sysclient.Sys/DelUser"
 )
 
 // SysClient is the client API for Sys service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SysClient interface {
+	CheckPermission(ctx context.Context, in *CheckPermissionReq, opts ...grpc.CallOption) (*CheckPermissionResp, error)
 	Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 	UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
 	AddUser(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
+	DelUser(ctx context.Context, in *UserDelReq, opts ...grpc.CallOption) (*UserDelResp, error)
 }
 
 type sysClient struct {
@@ -39,6 +43,15 @@ type sysClient struct {
 
 func NewSysClient(cc grpc.ClientConnInterface) SysClient {
 	return &sysClient{cc}
+}
+
+func (c *sysClient) CheckPermission(ctx context.Context, in *CheckPermissionReq, opts ...grpc.CallOption) (*CheckPermissionResp, error) {
+	out := new(CheckPermissionResp)
+	err := c.cc.Invoke(ctx, Sys_CheckPermission_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *sysClient) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
@@ -68,13 +81,24 @@ func (c *sysClient) AddUser(ctx context.Context, in *UserAddReq, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *sysClient) DelUser(ctx context.Context, in *UserDelReq, opts ...grpc.CallOption) (*UserDelResp, error) {
+	out := new(UserDelResp)
+	err := c.cc.Invoke(ctx, Sys_DelUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SysServer is the server API for Sys service.
 // All implementations must embed UnimplementedSysServer
 // for forward compatibility
 type SysServer interface {
+	CheckPermission(context.Context, *CheckPermissionReq) (*CheckPermissionResp, error)
 	Login(context.Context, *LoginReq) (*LoginResp, error)
 	UserInfo(context.Context, *InfoReq) (*InfoResp, error)
 	AddUser(context.Context, *UserAddReq) (*UserAddResp, error)
+	DelUser(context.Context, *UserDelReq) (*UserDelResp, error)
 	mustEmbedUnimplementedSysServer()
 }
 
@@ -82,6 +106,9 @@ type SysServer interface {
 type UnimplementedSysServer struct {
 }
 
+func (UnimplementedSysServer) CheckPermission(context.Context, *CheckPermissionReq) (*CheckPermissionResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckPermission not implemented")
+}
 func (UnimplementedSysServer) Login(context.Context, *LoginReq) (*LoginResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
@@ -90,6 +117,9 @@ func (UnimplementedSysServer) UserInfo(context.Context, *InfoReq) (*InfoResp, er
 }
 func (UnimplementedSysServer) AddUser(context.Context, *UserAddReq) (*UserAddResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUser not implemented")
+}
+func (UnimplementedSysServer) DelUser(context.Context, *UserDelReq) (*UserDelResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelUser not implemented")
 }
 func (UnimplementedSysServer) mustEmbedUnimplementedSysServer() {}
 
@@ -102,6 +132,24 @@ type UnsafeSysServer interface {
 
 func RegisterSysServer(s grpc.ServiceRegistrar, srv SysServer) {
 	s.RegisterService(&Sys_ServiceDesc, srv)
+}
+
+func _Sys_CheckPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckPermissionReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).CheckPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sys_CheckPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).CheckPermission(ctx, req.(*CheckPermissionReq))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Sys_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -158,6 +206,24 @@ func _Sys_AddUser_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Sys_DelUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserDelReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SysServer).DelUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Sys_DelUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SysServer).DelUser(ctx, req.(*UserDelReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Sys_ServiceDesc is the grpc.ServiceDesc for Sys service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -165,6 +231,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "sysclient.Sys",
 	HandlerType: (*SysServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CheckPermission",
+			Handler:    _Sys_CheckPermission_Handler,
+		},
 		{
 			MethodName: "Login",
 			Handler:    _Sys_Login_Handler,
@@ -176,6 +246,10 @@ var Sys_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddUser",
 			Handler:    _Sys_AddUser_Handler,
+		},
+		{
+			MethodName: "DelUser",
+			Handler:    _Sys_DelUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

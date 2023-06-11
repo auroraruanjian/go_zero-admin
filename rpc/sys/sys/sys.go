@@ -13,19 +13,25 @@ import (
 )
 
 type (
-	AdminPermission = sysclient.AdminPermission
-	AdminRole       = sysclient.AdminRole
-	InfoReq         = sysclient.InfoReq
-	InfoResp        = sysclient.InfoResp
-	LoginReq        = sysclient.LoginReq
-	LoginResp       = sysclient.LoginResp
-	UserAddReq      = sysclient.UserAddReq
-	UserAddResp     = sysclient.UserAddResp
+	AdminPermission     = sysclient.AdminPermission
+	AdminRole           = sysclient.AdminRole
+	CheckPermissionReq  = sysclient.CheckPermissionReq
+	CheckPermissionResp = sysclient.CheckPermissionResp
+	InfoReq             = sysclient.InfoReq
+	InfoResp            = sysclient.InfoResp
+	LoginReq            = sysclient.LoginReq
+	LoginResp           = sysclient.LoginResp
+	UserAddReq          = sysclient.UserAddReq
+	UserAddResp         = sysclient.UserAddResp
+	UserDelReq          = sysclient.UserDelReq
+	UserDelResp         = sysclient.UserDelResp
 
 	Sys interface {
+		CheckPermission(ctx context.Context, in *CheckPermissionReq, opts ...grpc.CallOption) (*CheckPermissionResp, error)
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
 		UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
 		AddUser(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error)
+		DelUser(ctx context.Context, in *UserDelReq, opts ...grpc.CallOption) (*UserDelResp, error)
 	}
 
 	defaultSys struct {
@@ -37,6 +43,11 @@ func NewSys(cli zrpc.Client) Sys {
 	return &defaultSys{
 		cli: cli,
 	}
+}
+
+func (m *defaultSys) CheckPermission(ctx context.Context, in *CheckPermissionReq, opts ...grpc.CallOption) (*CheckPermissionResp, error) {
+	client := sysclient.NewSysClient(m.cli.Conn())
+	return client.CheckPermission(ctx, in, opts...)
 }
 
 func (m *defaultSys) Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error) {
@@ -52,4 +63,9 @@ func (m *defaultSys) UserInfo(ctx context.Context, in *InfoReq, opts ...grpc.Cal
 func (m *defaultSys) AddUser(ctx context.Context, in *UserAddReq, opts ...grpc.CallOption) (*UserAddResp, error) {
 	client := sysclient.NewSysClient(m.cli.Conn())
 	return client.AddUser(ctx, in, opts...)
+}
+
+func (m *defaultSys) DelUser(ctx context.Context, in *UserDelReq, opts ...grpc.CallOption) (*UserDelResp, error) {
+	client := sysclient.NewSysClient(m.cli.Conn())
+	return client.DelUser(ctx, in, opts...)
 }

@@ -22,6 +22,11 @@ func NewSysServer(svcCtx *svc.ServiceContext) *SysServer {
 	}
 }
 
+func (s *SysServer) CheckPermission(ctx context.Context, in *sysclient.CheckPermissionReq) (*sysclient.CheckPermissionResp, error) {
+	l := logic.NewCheckPermissionLogic(ctx, s.svcCtx)
+	return l.CheckPermission(in)
+}
+
 func (s *SysServer) Login(ctx context.Context, in *sysclient.LoginReq) (*sysclient.LoginResp, error) {
 	l := logic.NewLoginLogic(ctx, s.svcCtx)
 	return l.Login(in)
@@ -35,4 +40,9 @@ func (s *SysServer) UserInfo(ctx context.Context, in *sysclient.InfoReq) (*syscl
 func (s *SysServer) AddUser(ctx context.Context, in *sysclient.UserAddReq) (*sysclient.UserAddResp, error) {
 	l := logic.NewAddUserLogic(ctx, s.svcCtx)
 	return l.AddUser(in)
+}
+
+func (s *SysServer) DelUser(ctx context.Context, in *sysclient.UserDelReq) (*sysclient.UserDelResp, error) {
+	l := logic.NewDelUserLogic(ctx, s.svcCtx)
+	return l.DelUser(in)
 }

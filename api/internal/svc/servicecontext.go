@@ -16,9 +16,10 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	sys := sys.NewSys(zrpc.MustNewClient(c.SysRpc))
 	return &ServiceContext{
 		Config:   c,
-		CheckUrl: middleware.NewCheckUrlMiddleware().Handle,
-		Sys:      sys.NewSys(zrpc.MustNewClient(c.SysRpc)),
+		CheckUrl: middleware.NewCheckUrlMiddleware(sys).Handle,
+		Sys:      sys,
 	}
 }

@@ -31,8 +31,9 @@ func (l *UserInfoLogic) UserInfo(in *sysclient.InfoReq) (*sysclient.InfoResp, er
 	// todo: add your logic here and delete this line
 	//in.UserId
 	u := query.AdminUser
+	admin_role := query.AdminRole
 	//user_row, err := u.Where(u.Id.Eq(in.UserId)).First()
-	user_row, err := u.Preload(u.AdminRole).Where(u.Id.Eq(int(in.UserId))).First()
+	user_row, err := u.Preload(u.AdminRole.Select(admin_role.Name, admin_role.Slug)).Where(u.Id.Eq(int(in.UserId))).First()
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, "用户不存在")
 	}

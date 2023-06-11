@@ -52,3 +52,10 @@ type AddUserReq struct {
 
 type AddUserResp struct {
 }
+
+type DelUserReq struct {
+	Id int32 `json:"id"`
+}
+
+type DelUserResp struct {
+}

@@ -25,6 +25,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 					Path:    "/addUser",
 					Handler: sysuser.AddHandler(serverCtx),
 				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/delUser",
+					Handler: sysuser.DelHandler(serverCtx),
+				},
 			}...,
 		),
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

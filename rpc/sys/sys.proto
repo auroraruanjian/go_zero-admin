@@ -48,6 +48,7 @@ message AdminPermission {
   string Description = 6;
 }
 
+// 添加用户
 message UserAddReq {
   string name = 1;
   string nickName = 2;
@@ -61,8 +62,27 @@ message UserAddResp {
   string pong = 1;
 }
 
+// 删除用户
+message UserDelReq {
+  int32 id = 1;
+}
+message UserDelResp {
+  string pong = 1;
+}
+
+// 检查菜单权限
+message CheckPermissionReq {
+  int32 UserId = 1;
+  string Rule = 2; 
+}
+message CheckPermissionResp {
+  string pong = 1;
+}
+
 service Sys{
+  rpc CheckPermission(CheckPermissionReq) returns(CheckPermissionResp);
   rpc Login(LoginReq) returns(loginResp);
   rpc UserInfo(InfoReq) returns(InfoResp);
   rpc AddUser(UserAddReq) returns(UserAddResp);
+  rpc DelUser(UserDelReq) returns(UserDelResp);
 }

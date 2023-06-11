@@ -2,6 +2,7 @@ package {{.pkgName}}
 
 import (
 	{{.imports}}
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 type {{.logic}} struct {
